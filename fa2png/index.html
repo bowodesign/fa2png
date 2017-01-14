@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>:: Convert Icon Fonts To PNG ::</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./icon-fonts/font-awesome-4.2.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="./bootstrap-iconpicker/css/bootstrap-iconpicker.min.css"/>
+  <script type="text/javascript" src="./jquery/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="./bootstrap-3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./html2canvas/html2canvas.js"></script>
+  <script type="text/javascript" src="./html2canvas/download2.js"></script>
+<style>
+body{margin:50px;}
+      #accordion .glyphicon { margin-right:10px; }
+      .panel-collapse>.list-group .list-group-item:first-child {border-top-right-radius: 0;border-top-left-radius: 0;}
+      .panel-collapse>.list-group .list-group-item {border-width: 1px 0;}
+      .panel-collapse>.list-group {margin-bottom: 0;}
+      .panel-collapse .list-group-item {border-radius:0;}
+
+      .panel-collapse .list-group .list-group {margin: 0;margin-top: 10px;}
+      .panel-collapse .list-group-item li.list-group-item {margin: 0 -15px;border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 30px;}
+      .panel-collapse .list-group-item li.list-group-item:last-child {padding-bottom: 0;}
+
+      .panel-collapse div.list-group div.list-group{margin: 0;}
+      .panel-collapse div.list-group .list-group a.list-group-item {border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 30px;}
+      .panel-collapse .list-group-item li.list-group-item {border-top: 1px solid #DDD !important;}
+
+.container {
+  padding-top:50px;
+}
+
+.swatch {
+  width:70px;
+  height:70px;
+  border-radius:5px;
+  border: 2px solid #666;
+}
+
+.swatch-clickable:hover {
+  border: 2px solid #000;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  padding:10px;
+}
+
+img {
+	-webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
+    -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    margin-bottom:20px;
+}
+
+.range {
+    display: table;
+    position: relative;
+    height: 25px;
+    margin-top: 20px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.range input[type="range"] {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+
+    display: table-cell;
+    width: 100%;
+    background-color: transparent;
+    height: 25px;
+    cursor: pointer;
+}
+.range input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+
+    width: 11px;
+    height: 25px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0px;
+    background-color: rgb(153, 153, 153);
+}
+
+.range input[type="range"]::-moz-slider-thumb {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+    
+    width: 11px;
+    height: 25px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0px;
+    background-color: rgb(153, 153, 153);
+}
+
+.range output {
+    display: table-cell;
+    padding: 3px 5px 2px;
+    min-width: 40px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(153, 153, 153);
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+}
+.range input[type="range"] {
+    outline: none;
+}
+
+.range.range-info input[type="range"]::-webkit-slider-thumb {
+    background-color: rgb(91, 192, 222);
+}
+.range.range-info input[type="range"]::-moz-slider-thumb {
+    background-color: rgb(91, 192, 222);
+}
+.range.range-info output {
+    background-color: rgb(91, 192, 222);
+}
+.range.range-info input[type="range"] {
+    outline-color: rgb(91, 192, 222);
+}
+</style>	
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".swatch swatch-clickable").click(function() {
+		var colorName = $(this).attr('id');
+		var colorHex  = $(this).css('background-color'));
+		 
+		$(this).parents('.input-group-btn').find('.dropdown-toggle').html(selHTML+'<span class="caret"></span>');	   
+		$(".btn-color").css('background-color', colorHex);
+	});
+
+    $(".swatch-clickable").click(function(){
+		var colorName = $(this).attr('id');
+		var colorHex  = $(this).css('background-color');
+        $("#color-name").html(colorName);
+		$("#icon-preview").css("color", colorHex);		
+    });
+});
+</script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3">
+          <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-camera"></span> Choose icon & color</a>
+                </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse in">
+                <ul class="list-group">
+                  <li class="list-group-item">				
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button class="btn btn-default" data-iconset="fontawesome" data-icon="fa-cogs" role="iconpicker"></button>
+						</span>
+						<input type="text" id="iconName" class="form-control" disabled>
+					</div>
+                  </li>
+                  <li class="list-group-item">				
+					<div class="input-group">
+					<table>
+					  <tr>
+						<td style="padding-right:5px;">
+						  <div id="preview" class="swatch" style="background-color:#fff" ></div>
+						</td>
+						<td>
+							<input id="color-field" class="color-field" value="White" style="display:none;">
+							<div class="dropdown">
+								  <a class="dropdown-toggle btn btn-default btn-color" data-toggle="dropdown" href="#"><span id="color-name">White</span></a>
+								  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+									<table>
+									  <tr>
+										<td><div id="Red" class="swatch swatch-clickable" style="background-color:#d11600"></div></td>
+										<td><div id="Orange" class="swatch swatch-clickable" style="background-color:#f96302"></div></td>
+										<td><div id="Banana" class="swatch swatch-clickable" style="background-color:#ffed38"></div></td>
+										<td><div id="Lemon" class="swatch swatch-clickable" style="background-color:#e5e111"></div></td>
+										<td><div id="Lime" class="swatch swatch-clickable" style="background-color:#cee007"></div></td>
+										<td><div id="Evergreen" class="swatch swatch-clickable" style="background-color:#339e35"></div></td>
+									  </tr>
+									  <tr>
+										<td><div id="Lunar Blue" class="swatch swatch-clickable" style="background-color:#60afdd"></div></td>
+										<td><div id="Grape" class="swatch swatch-clickable" style="background-color:#9b4f96"></div></td>
+										<td><div id="Hot Pink" class="swatch swatch-clickable" style="background-color:#fc0093"></div></td>
+										<td><div id="Sagebrush" class="swatch swatch-clickable" style="background-color:#c6c699"></div></td>
+										<td><div id="Tan" class="swatch swatch-clickable" style="background-color:tan"></div></td>
+										<td><div id="White" class="swatch swatch-clickable" style="background-color:white"></div></td>
+									  </tr>
+									</table>
+								  </ul>
+							</div>
+						</td>
+					  </tr>
+					</table>
+					</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+			<div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-resize-full"></span> icon Size</a>
+                </h4>
+              </div>
+              <div id="collapseTwo" class="panel-collapse collapse in">
+                <ul class="list-group">
+                  <li class="list-group-item">				
+					<div class="form-group">
+						<div class="range range-info">
+							<input type="range" id="range" name="range" min="8" max="1024" value="100" onchange="rangeInfo.value=value">
+							<output id="rangeInfo">100</output>
+						</div>
+					</div>
+                  </li>
+				</ul>
+			  </div>
+			</div>
+			<div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+					<button type="button" class="btn btn-warning btn-block" id="btnSave"><i class="fa fa-cogs"></i> Download</button>
+                </h4>
+              </div>
+            </div>
+			<div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-heart">
+                    </span>About Our App</a>
+                </h4>
+              </div>
+              <div id="collapseThree" class="panel-collapse collapse">
+                <div class="list-group">
+                  <a href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">Lorem ipsum dolor sit amet</h4>
+                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum a erat at ornare. Fusce efficitur augue a ipsum dignissim, ut luctus lacus gravida. Ut id lectus in massa dignissim varius lobortis eu metus. Proin porta massa sed nunc blandit, non elementum metus euismod. Phasellus fermentum ultricies tincidunt. Praesent nibh nisl, fermentum eu nunc sit amet, sollicitudin tempor nibh. Donec ornare turpis ullamcorper nisi placerat, eu auctor est consequat. Phasellus commodo feugiat metus, vitae eleifend urna tempor a. Maecenas quis metus ante. Proin malesuada sem ipsum, at sollicitudin tellus imperdiet eget. Vestibulum a quam mattis, convallis lectus vel, facilisis dui. Pellentesque ut sapien metus. Etiam euismod laoreet nunc sed pretium.</p>
+                  </a>
+                </div>           
+              </div>
+            </div>
+          </div>
+		</div>
+	    <div class="col-sm-9 col-md-9">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><span class="glyphicon glyphicon-camera">
+                </span> Preview</h3>
+            </div>
+            <div class="panel-body text-center">
+              <div class="alert alert-success">			
+			  <div id="icon-preview" style="background: transparent;font-size: 100px">
+					<span class="fa fa-cogs" id="result"></span>					
+			  </div>				
+            </div>			
+          </div>		  
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./bootstrap-iconpicker/js/iconset/iconset-all.min.js"></script>
+<script type="text/javascript" src="./bootstrap-iconpicker/js/bootstrap-iconpicker.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+   $("#iconName").val($("#iconset").val());
+   $("button").change(function() {
+		$("#iconName").val($("#iconset").val());
+		$("#icon-preview").html("<span class='fa "+$("#iconset").val()+"' id='result'></span>");
+   });
+   $(".swatch-clickable").click(function(){
+		var colorName = $(this).attr('id');
+		var colorHex  = $(this).css('background-color');
+		$("#icon-preview").css('color', colorHex);		
+    });
+   $("#range").change(function() {
+		$("#icon-preview").css("font-size", $(this).val()+"px");
+   });
+   $("#btnSave").click(function() { 
+		html2canvas($("#result"), {
+			onrendered: function(canvas) {
+				var img = canvas.toDataURL("image/png");
+				download(img, "download.png", "image/png");
+			}
+		});	
+	});
+});
+</script>
+</body>
+</html>
